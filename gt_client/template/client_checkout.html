@@ -1,0 +1,159 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block content %}
+<!-- Breadcrumb Area Start -->
+<div class="breadcrumb-area bg-dark">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- Breadcrumb Area End -->
+<!-- Checkout Area Start -->
+<div class="checkout-area pt-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-12">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <div class="panel-heading" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" data-bs-toggle="collapse" data-parent="#accordion" href="#billing">
+                                    <span>1</span> BILLING INFORMATION
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="billing" class="collapse">
+                            <div class="panel-body">
+                                <div class="login-form">
+                                    <form action="#" method="post">
+                                        <div class="customer-name">
+                                            <div class="first-name">
+                                                <p>First Name<span>*</span></p>
+                                                <input type="text" required value="{{user.first_name}}">
+                                            </div>
+                                            <div class="last-name">
+                                                <p>Last Name<span>*</span></p>
+                                                <input type="text" required value="{{user.last_name}}">
+                                            </div>
+                                        </div>
+                                        <div class="customer-info">
+                                            <div class="company-name">
+                                                <p>Contact Number</p>
+                                                <input type="text" value="{{user.contact}}">
+                                            </div>
+                                            <div class="email-address">
+                                                <p>Email Adress<span>*</span></p>
+                                                <input type="email" required value="{{user.email}}">
+                                            </div>
+                                        </div>
+                                        <p>Address<span>*</span></p>
+                                        <input type="text" required value="{{user.address}}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-heading" id="headingSix">
+                            <h4 class="panel-title">
+                                <a class="collapsed" data-bs-toggle="collapse" data-parent="#accordion"
+                                   href="#order-review">
+                                    <span>2</span> ORDER REVIEW
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="order-review" class="collapse">
+                            <div class="panel-body">
+                                <form action="/client/place_order/{{total|add:100}}" method="post">
+                                    {% csrf_token %}
+                                    <div class="checkout-table table-responsive">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th class="p-name alignleft">Product Name</th>
+                                                <th class="p-amount">Price</th>
+                                                <th class="p-quantity">Qty</th>
+                                                <th class="p-total">SubTotal</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for data in product %}
+                                            <tr>
+                                                <td class="p-name">{{data.product_id.product_name}}</td>
+                                                <td class="p-amount"><span class="amount">{{data.product_id.product_price}} ₹</span>
+                                                </td>
+                                                <td class="p-quantity">{{data.cart_qty}}</td>
+                                                <td class="p-total alignright">{{data.total_amt}} ₹</td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="3" class="alignright">Subtotal</td>
+                                                <td>{{total}} ₹</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="alignright">Shipping &amp; Handling (Flat Rate -
+                                                    Fixed)
+                                                </td>
+                                                <td>100 ₹</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="alignright"><strong>Grand Total</strong></td>
+                                                <td><strong>{{total|add:100}} ₹</strong></td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-heading" id="headingFive">
+                            <h4 class="panel-title">
+                                <a class="collapsed" data-bs-toggle="collapse" data-parent="#accordion"
+                                   href="#payment-info">
+                                    <span>3</span> PAYMENT INFORMATION
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="payment-info" class="collapse">
+                            <form method="post" action="/client/place_order/{{total|add:100}}">
+                                {% csrf_token %}
+                                <div class="panel-body">
+                                    <div class="ship-method payment">
+                                        <div class="ship-wrap">
+                                            <div class="ship-address">
+                                                <input type="radio" name="payment_status" value="1">
+                                                <input type="hidden" name="address" value="{{user.address}}">
+                                                <input type="hidden" name="contact" value="{{user.contact}}">
+                                                <img src="{% static 'client_assets/img/cod.jpg' %}" alt="paypal" width="300px">
+                                            </div>
+                                            <div class="ship-address">
+                                                <input type="radio" name="payment_status" value="2">
+                                                <img src="{% static 'client_assets/img/paypal.png' %}" alt="paypal" width="300px">
+                                            </div>
+                                        </div>
+                                        <div class="buttons-set">
+                                            <button type="submit" class="button"><span>Place Order</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Checkout Area End -->
+{% endblock %}

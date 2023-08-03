@@ -1,0 +1,148 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block content %}
+<!-- Header Area End -->
+<!-- Breadcrumb Area Start -->
+<div class="breadcrumb-area bg-dark">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Account</li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- Breadcrumb Area End -->
+<!-- Account Area Start -->
+<div class="my-account-area ptb-80">
+    <div class="container">
+        <h2 align="center">Edit Profile</h2>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <form method="post" class="needs-validation" action="/client/client_updatepro/">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-6 col-12">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" name="first_name" value="{{ca.first_name}}">
+                                <div class="invalid-feedback">
+                                    Please fill in the first name
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-12">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" name="last_name" value="{{ca.last_name}}">
+                                <div class="invalid-feedback">
+                                    Please fill in the last name
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6 col-12">
+                                <label>Address</label>
+                                <input type="text" class="form-control" name="address" value="{{ca.address}}">
+                                <div class="invalid-feedback">
+                                    Please fill in the first name
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-12">
+                                <label>Contact</label>
+                                <input type="text" class="form-control" name="contact" value="{{ca.contact}}">
+                                <div class="invalid-feedback">
+                                    Please fill in the last name
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6 col-12">
+                                <label>Email</label>
+                                <input type="text" class="form-control" name="email" value="{{ca.email}}">
+                                <div class="invalid-feedback">
+                                    Please fill in the first name
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-12">
+                                <label>Registered Date</label>
+                                <input type="date" class="form-control" name="registered_date" value="{{register}}">
+                                <input type="hidden" name="is_admin" value="0">
+                                <div class="invalid-feedback">
+                                    Please fill in the last name
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-12">
+                                <!--                                <label>Password</label>-->
+                                <input type="hidden" class="form-control" name="password" value="{{ca.password}}">
+                                <div class="invalid-feedback">
+                                    Please fill in the last name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-action">
+                        <button type="submit">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="cart-main-area ptb-80">
+        <h2 align="center">Your Orders</h2>
+        <div class="container">
+            <form action="#">
+                <div class="cart-table table-responsive">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th class="p-name">Name</th>
+                            <th class="p-name">Address</th>
+                            <th class="p-name">Contact Number</th>
+                            <th class="p-name">Order Date</th>
+                            <th class="p-name">Order Status</th>
+                            <th class="p-name">Total Amount</th>
+                            <th class="p-name">Payment Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for data in order %}
+                        <tr>
+                            <td style="font-size:17px">{{data.user_id.first_name}} {{data.user_id.last_name}}</td>
+                            <td style="font-size:17px">{{data.address}}</td>
+                            <td style="font-size:17px">{{data.contact}}</td>
+                            <td style="font-size:17px">{{data.order_date}}</td>
+                            <td style="font-size:17px">
+                                {% if data.order_status == '0' %}
+                                Pending
+                                {% elif data.order_status == '1' %}
+                                Accepted
+                                {% elif data.order_status == '2' %}
+                                Rejected
+                                {% endif %}
+                            </td>
+                            <td style="font-size:17px">{{data.total_amount}}</td>
+                            <td style="font-size:17px">
+                                {% if data.payment_status == '1' %}
+                                Cash on Delivery
+                                {% elif data.payment_status == '2'%}
+
+                                {% endif %}
+                            </td>
+                        </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div align="center">
+        <a href="/client/client_logout/"><b><img
+                src="https://img.icons8.com/external-inkubators-gradient-inkubators/25/000000/external-sign-out-video-interface-inkubators-gradient-inkubators.png"/>Logout</b></a>
+    </div>
+</div>
+<!-- Account Area End -->
+<!-- Footer Area Start -->
+{% endblock %}

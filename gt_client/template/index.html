@@ -1,0 +1,492 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block content %}
+	    <!-- Slider Area Start -->
+	    <div class="slider-area">
+	        <div class="slider-wrapper owl-carousel carousel-style-dot">
+	            <div class="single-slide" style="background-image: url({% static 'client_assets/img/slider/1.jpg' %});">
+	                <div class="container">
+                        <div class="slider-banner">
+                            <h1>Collection</h1>
+                            <h2>Lamps light Color</h2>
+                            <p>Eikon is made of certified wood and a lampshade that is attached<br>simply with the help of magnets.</p>
+                            <a href="shop.html" class="banner-btn">Shop now</a>
+                        </div>
+	                </div>
+	            </div>
+	            <div class="single-slide slide-two" style="background-image: url({% static 'client_assets/img/slider/2.jpg' %});">
+	                <div class="container">
+                        <div class="slider-banner">
+                            <h1>inimalist design</h1>
+                            <h2>Lounge Chairs</h2>
+                            <p>Doko Demo is a minimalist design created by<br>Copenhagen-based designer CZYK</p>
+                            <a href="shop.html" class="banner-btn">Shop now</a>
+                        </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- Slider Area End -->
+	    <!-- Banner Area Start -->
+	    <div class="banner-area pt-90">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-lg-3 col-md-3">
+                        <a class="banner-image" href="shop.html"><img src="{% static 'client_assets/img/banner/1.jpg' %}" alt=""></a>
+	                </div>
+	                <div class="col-lg-6 col-md-6">
+                        <a class="banner-image" href="shop.html"><img src="{% static 'client_assets/img/banner/2.jpg' %}" alt=""></a>
+	                </div>
+	                <div class="col-lg-3 col-md-3">
+                        <a class="banner-image" href="shop.html"><img src="{% static 'client_assets/img/banner/3.jpg' %}" alt=""></a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- Banner Area End -->
+	    <!-- Product Area Start -->
+	    <div class="product-area text-center pt-90 pb-85">
+	        <div class="container">
+	            <div class="section-title">
+                    <span>new shop item</span>
+	                <h2><span>Nightstands</span></h2>
+	            </div>
+	        </div>
+	        <div class="container">
+	            <div class="custom-row">
+	                <div class="product-carousel owl-carousel carousel-style-one">
+                        {% for p in pro %}
+	                    <div class="custom-col">
+	                        <div class="product-item">
+                                <div class="product-image-hover">
+                                    <a href="/client/client_shopdetails/{{p.product_id}}">
+                                        <img class="primary-image" src="{% static '/images/' %}{{p.product_image}}" alt="" height="200" width="200">
+                                    </a>
+                                </div>
+                                <div class="product-text">
+                                    <h4><a href="/client/client_shopdetails/{{p.product_id}}">{{p.product_name}}</a></h4>
+                                    <div class="product-price"><span>{{p.product_price}} ₹</span></div>
+                                </div>
+	                        </div>
+	                    </div>
+                        {% endfor %}
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- Product Area End -->
+	    <!-- Banner Area Start -->
+	    <div class="banner-area">
+	        <div class="container">
+	            <div class="row grid">
+	                <div class="col-md-3 grid-item">
+                        <a class="banner-image" href="shop.html">
+                            <img src="{% static 'client_assets/img/banner/4.jpg' %}" alt="">
+                            <span class="banner-hover-text">Chair collection</span>
+                        </a>
+	                </div>
+	                <div class="col-md-3 grid-item">
+                        <a class="banner-image" href="shop.html">
+                            <img src="{% static 'client_assets/img/banner/5.jpg' %}" alt="">
+                            <span class="banner-hover-text">Lighting collection</span>
+                        </a>
+	                </div>
+	                <div class="col-md-3 grid-item">
+                        <a class="banner-image" href="shop.html">
+                            <img src="{% static 'client_assets/img/banner/6.jpg' %}" alt="">
+                            <span class="banner-hover-text">HOME ACCESSORIES</span>
+                        </a>
+	                </div>
+	                <div class="col-md-3 grid-item">
+                        <a class="banner-image" href="shop.html">
+                            <img src="{% static 'client_assets/img/banner/7.jpg' %}" alt="">
+                            <span class="banner-hover-text">Black Hanging Chair</span>
+                        </a>
+	                </div>
+	                <div class="col-md-3 grid-item">
+                        <a class="banner-image" href="shop.html">
+                            <img src="{% static 'client_assets/img/banner/9.jpg' %}" alt="">
+                            <span class="banner-hover-text">COFFEE &amp; SIDE TABLES</span>
+                        </a>
+	                </div>
+	                <div class="col-md-3 grid-item">
+                        <a class="banner-image" href="shop.html">
+                            <img src="{% static 'client_assets/img/banner/8.jpg' %}" alt="">
+                            <span class="banner-hover-text">sofa collection</span>
+                        </a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- Banner Area End -->
+	    <!-- Feature Product Area Start -->
+	    <div class="feature-product-area text-center ptb-60">
+
+	        <div class="container fix">
+	            <div class="custom-row">
+                    <div class="feature-product-carousel owl-carousel">
+                        {% for p in pro %}
+                        <div class="custom-col">
+                            <div class="product-item mb-25">
+                                <span class="hot-sale">New</span>
+                                <div class="product-image-hover">
+                                    <a href="/client/client_shopdetails/{{p.product_id}}">
+                                        <img class="primary-image" src="{% static '/images/' %}{{p.product_image}}" alt="" height="300px" width="300px">
+                                    </a>
+
+                                </div>
+                                <div class="product-text">
+                                    <h4><a href="/client/client_shopdetails/{{p.product_id}}">{{p.product_name}}</a></h4>
+                                    <div class="product-price">
+                                        <span>{{p.product_price}} ₹</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- Feature Product Area End -->
+	    <!-- Banner Area Start -->
+	    <!-- Banner Area End -->
+	    <!-- Product Widget Area Start -->
+	    <div class="product-widget-area pt-90 pb-70">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-lg-3 col-md-6">
+	                    <div class="single-product-widget">
+	                        <div class="product-widget-title">
+	                            <span>Radom Furniture</span>
+	                            <h4>Random products</h4>
+	                        </div>
+	                        <div class="product-widget-item">
+	                            <div class="product-wid-img">
+	                                <a href="shop.html"><img src="{% static 'client_assets/img/widget/1.jpg' %}" alt=""></a>
+	                            </div>
+                                <div class="product-text">
+                                    <h4><a href="shop.html">Push It Messenger Bag</a></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-price"><span>$50.00</span></div>
+                                </div>
+	                        </div>
+	                        <div class="product-widget-item">
+	                            <div class="product-wid-img">
+	                                <a href="shop.html"><img src="{% static 'client_assets/img/widget/10.jpg' %}" alt=""></a>
+	                            </div>
+                                <div class="product-text">
+                                    <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-price"><span>$5.00</span></div>
+                                </div>
+	                        </div>
+	                        <div class="product-widget-item">
+	                            <div class="product-wid-img">
+	                                <a href="shop.html"><img src="{% static 'client_assets/img/widget/4.jpg' %}" alt=""></a>
+	                            </div>
+                                <div class="product-text">
+                                    <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-price"><span>$8.00</span><span class="prev-price">$12.00</span></div>
+                                </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3 col-md-6">
+	                    <div class="single-product-widget">
+	                        <div class="product-widget-title">
+	                            <span>New Furniture</span>
+	                            <h4>new arrivals products</h4>
+	                        </div>
+	                        <div class="product-widget-item">
+	                            <div class="product-wid-img">
+	                                <a href="shop.html"><img src="{% static 'client_assets/img/widget/2.jpg' %}" alt=""></a>
+	                            </div>
+                                <div class="product-text">
+                                    <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-price"><span>$5.00</span></div>
+                                </div>
+	                        </div>
+	                        <div class="product-widget-item">
+	                            <div class="product-wid-img">
+	                                <a href="shop.html"><img src="{% static 'client_assets/img/widget/3.jpg' %}" alt=""></a>
+	                            </div>
+                                <div class="product-text">
+                                    <h4><a href="shop.html">Push It Messenger Bag</a></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-price"><span>$50.00</span></div>
+                                </div>
+	                        </div>
+	                        <div class="product-widget-item">
+	                            <div class="product-wid-img">
+	                                <a href="shop.html"><img src="{% static 'client_assets/img/widget/5.jpg' %}" alt=""></a>
+	                            </div>
+                                <div class="product-text">
+                                    <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-price"><span>$8.00</span><span class="prev-price">$12.00</span></div>
+                                </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3 col-md-6">
+	                    <div class="single-product-widget">
+	                        <div class="product-widget-title">
+	                            <span>popular Furniture</span>
+	                            <h4>best seller products</h4>
+	                        </div>
+	                        <div class="product-widget-item">
+	                            <div class="product-wid-img">
+	                                <a href="shop.html"><img src="{% static 'client_assets/img/widget/6.jpg' %}" alt=""></a>
+	                            </div>
+                                <div class="product-text">
+                                    <h4><a href="shop.html">Push It Messenger Bag</a></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-price"><span>$50.00</span></div>
+                                </div>
+	                        </div>
+	                        <div class="product-widget-item">
+	                            <div class="product-wid-img">
+	                                <a href="shop.html"><img src="{% static 'client_assets/img/widget/7.jpg' %}" alt=""></a>
+	                            </div>
+                                <div class="product-text">
+                                    <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-price"><span>$8.00</span><span class="prev-price">$12.00</span></div>
+                                </div>
+	                        </div>
+	                        <div class="product-widget-item">
+	                            <div class="product-wid-img">
+	                                <a href="shop.html"><img src="{% static 'client_assets/img/widget/8.jpg' %}" alt=""></a>
+	                            </div>
+                                <div class="product-text">
+                                    <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-price"><span>$5.00</span></div>
+                                </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3 col-md-6">
+	                    <div class="single-product-widget">
+	                        <div class="product-widget-title">
+	                            <span>Sale Furniture</span>
+	                            <h4>On Sale products</h4>
+	                        </div>
+	                        <div class="product-widget-item">
+	                            <div class="product-wid-img">
+	                                <a href="shop.html"><img src="{% static 'client_assets/img/widget/9.jpg' %}" alt=""></a>
+	                            </div>
+                                <div class="product-text">
+                                    <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-price"><span>$5.00</span></div>
+                                </div>
+	                        </div>
+	                        <div class="product-widget-item">
+	                            <div class="product-wid-img">
+	                                <a href="shop.html"><img src="{% static 'client_assets/img/widget/6.jpg' %}" alt=""></a>
+	                            </div>
+                                <div class="product-text">
+                                    <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-price"><span>$8.00</span><span class="prev-price">$12.00</span></div>
+                                </div>
+	                        </div>
+	                        <div class="product-widget-item">
+	                            <div class="product-wid-img">
+	                                <a href="shop.html"><img src="{% static 'client_assets/img/widget/1.jpg' %}" alt=""></a>
+	                            </div>
+                                <div class="product-text">
+                                    <h4><a href="shop.html">Push It Messenger Bag</a></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-price"><span>$50.00</span></div>
+                                </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- Product Widget Area End -->
+	    <!-- Blog Area Start -->
+	    <div class="blog-area pb-85">
+	        <div class="container text-center">
+	            <div class="section-title">
+                    <span>Latest New</span>
+	                <h2><span>FROM OUR BLOG</span></h2>
+	            </div>
+	        </div>
+	        <div class="container">
+	            <div class="custom-row">
+                    <div class="blog-carousel owl-carousel">
+                        <div class="custom-col">
+                            <div class="single-blog">
+                                <div class="blog-image">
+                                    <a href="blog.html">
+                                        <img src="{% static 'client_assets/img/blog/1.jpg' %}" alt="">
+                                        <span>05 <span>July</span></span>
+                                    </a>
+                                </div>
+                                <div class="blog-text">
+                                    <h5><a href="blog.html">Eodem modo typi qui nunc nobis</a></h5>
+                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                                    <a href="blog.html">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-col">
+                            <div class="single-blog">
+                                <div class="blog-image">
+                                    <a href="blog.html">
+                                        <img src="{% static 'client_assets/img/blog/2.jpg' %}" alt="">
+                                        <span>20 <span>June</span></span>
+                                    </a>
+                                </div>
+                                <div class="blog-text">
+                                    <h5><a href="blog.html">Typi non habent claritatem insitam</a></h5>
+                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
+                                    <a href="blog.html">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-col">
+                            <div class="single-blog">
+                                <div class="blog-image">
+                                    <a href="blog.html">
+                                        <img src="{% static 'client_assets/img/blog/3.jpg' %}" alt="">
+                                        <span>15 <span>May</span></span>
+                                    </a>
+                                </div>
+                                <div class="blog-text">
+                                    <h5><a href="blog.html">Claritas est etiam process dyname</a></h5>
+                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum lorem ipsum dolor asmet.</p>
+                                    <a href="blog.html">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- Blog Area End -->
+	    <!-- Information Area Start -->
+	    <div class="information-area">
+	        <div class="container">
+	            <div class="information-wrapper ptb-60">
+	                <div class="row">
+	                    <div class="col-md-3">
+	                        <div class="single-information">
+	                            <div class="s-info-img"><img src="{% static 'client_assets/img/icon/shipping.png' %}" alt=""></div>
+	                            <div class="s-info-text">
+	                                <h4>free shipping</h4>
+	                                <span>Free shipping on all US order</span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-3">
+	                        <div class="single-information">
+	                            <div class="s-info-img"><img src="{% static 'client_assets/img/icon/online.png' %}" alt=""></div>
+	                            <div class="s-info-text">
+	                                <h4>Online Support 24/7</h4>
+	                                <span>Support online 24 hours a day</span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-3">
+	                        <div class="single-information">
+	                            <div class="s-info-img"><img src="{% static 'client_assets/img/icon/money.png' %}" alt=""></div>
+	                            <div class="s-info-text">
+	                                <h4>Money Return</h4>
+	                                <span>Back guarantee under 7 days</span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-3">
+	                        <div class="single-information">
+	                            <div class="s-info-img"><img src="{% static 'client_assets/img/icon/member.png' %}" alt=""></div>
+	                            <div class="s-info-text">
+	                                <h4>Member Discount</h4>
+	                                <span>Onevery order over $120.00</span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+{% endblock %}

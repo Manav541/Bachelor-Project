@@ -1,0 +1,68 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block content %}
+        <!-- Header Area End -->
+        <!-- Breadcrumb Area Start -->
+        <div class="breadcrumb-area bg-dark">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Account</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- Breadcrumb Area End -->
+        <!-- Account Area Start -->
+        <div class="my-account-area ptb-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <form action="/client/client_register/" method="post">
+                            {% csrf_token %}
+                            <div class="form-fields">
+                                <h2>Registration</h2>
+                                <p>
+                                    <label class="important">First Name</label>
+                                    <input type="text" name="first_name">
+                                </p>
+                                <p>
+                                    <label class="important">Last Name</label>
+                                    <input type="text" name="last_name">
+                                </p>
+                                <p>
+                                    <label class="important">Address</label>
+                                    <input type="text" name="address">
+                                </p>
+                                <p>
+                                    <label class="important">Contact Number</label>
+                                    <input type="number" name="contact">
+                                </p>
+                                 <p>
+                                    <input type="hidden" name="is_admin" value="0">
+                                </p>
+                                <p>
+                                    <label for="reg-email" class="important">Email address</label>
+                                    <input type="email" id="reg-email" name="email">
+                                </p>
+                                <p>
+                                    <label for="reg-pass" class="important">Password</label>
+                                    <input type="password" id="reg-pass" name="password">
+                                </p>
+                                <p>
+                                    <label class="important">DOB</label>
+                                    <input type="date" name="registered_date">
+                                </p>
+                            </div>
+                            <div class="form-action">
+                                <button type="submit">Create Account</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Account Area End -->
+	    <!-- Footer Area Start -->
+	   {% endblock %}

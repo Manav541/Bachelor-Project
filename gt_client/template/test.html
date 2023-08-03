@@ -1,0 +1,12 @@
+{% load static %}
+{% for category in cat %}
+<li value="{{category.category_id}}"><a href="/client/client_shop/">{{category.category_name}}</a>
+    <ul>
+        {% for x in sub %}
+        {% if category.category_id == x.category_id_id %}
+        <li value="{{x.subcategory_id}}"><a href="{{x.subcategory_name}}"></a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</li>
+{% endfor %}

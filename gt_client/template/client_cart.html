@@ -1,0 +1,216 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% load cart_tag %}
+{% load mathfilters %}
+{% block content %}
+<!-- Header Area End -->
+<!-- Breadcrumb Area Start -->
+<script>
+    function up(max) {
+<!--    alert("up");-->
+	var qty = parseInt(document.getElementById("qty1-"+max).value) + 1;
+    document.getElementById("qty1-"+max).value = qty;
+		getQty(max);
+}
+
+function down(min) {
+	var qty = parseInt(document.getElementById("qty1-"+min).value) - 1;
+    document.getElementById("qty1-"+min).value = qty;
+
+	getQty(min);
+}
+
+function getQty(val)
+{
+<!--	alert(val);-->
+	var q = $("#qty1-"+val).val();
+<!--	alert(q)-->
+		$.ajax({
+	        type:'GET',
+			url:'/client/update_cart/'+val,
+            data:{id:val,qty:q},
+			success: function(data){
+
+                    location.reload();
+			}
+	});
+}
+function getQtyPlus(val)
+{
+<!--	alert(val);-->
+	var q = $("#qty1-"+val).val();
+	alert(q)
+		$.ajax({
+	        type:'GET',
+			url:'/client/update_cart/'+val,
+            data:{
+            id:val,
+            qty:q
+            },
+			success: function(data){
+
+                    location.reload();
+			}
+	});
+
+}
+function getQtyMius(val)
+{
+<!--	alert(val);-->
+	var q = $("#qty1-"+val).val();
+	alert(q)
+		$.ajax({
+	        type:'GET',
+			url:'/client/update_cart/'+val,
+            data:{id:val,qty:q},
+			success: function(data){
+
+                    location.reload();
+			}
+	});
+
+}
+
+
+
+
+</script>
+<div class="breadcrumb-area bg-dark">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/client/index/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Cart</li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- Breadcrumb Area End -->
+<!-- Cart Main Area Start -->
+<div class="cart-main-area ptb-80">
+    <div class="container">
+        <form action="#">
+            <div class="cart-table table-responsive">
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="p-name">Product Image</th>
+                        <th class="p-name">Product Name</th>
+                        <th class="p-amount">Unit Price</th>
+                        <th class="p-quantity">Qty</th>
+                        <th class="p-total">SubTotal</th>
+                        <th class="p-edit">Remove</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if 'client_user_id' in request.session %}
+                    {% for data in cart %}
+                    <tr>
+                        <td class="p-name">
+                            <img alt=""
+                                 src="{% static '/images/' %}{{data.product_id.product_image}}"
+                                 height="200px" width="200px">
+                        </td>
+                        <td class="p-name" style="font-size:15px">{{data.product_id.product_name}}</td>
+                        <td class="p-amount">{{data.product_id.product_price}} ₹</td>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <!--                                <div class="input-group-btn">-->
+                                <!--                                    <button id="down" class="btn btn-default" onclick="down({{data.Cart_id}})"><span-->
+                                <!--                                            class="glyphicon glyphicon-minus" onchange=""></span></button>-->
+                                <!--                                </div>-->
+                                <!--                                <input type="text" id="qty-{{data.Cart_id}}"-->
+                                <!--                                       style="text-align:center;width:55px;height:35px" value="{{data.cart_qty}}"-->
+                                <!--                                       onChange="getQty({{data.Cart_id}})"/>-->
+                                <!--                                <div class="input-group-btn">-->
+                                <!--                                    <button id="up" class="btn btn-default" onclick="up({{data.Cart_id}})"><span-->
+                                <!--                                            class="glyphicon glyphicon-plus" onchange=""></span></button>-->
+                                <!--                                </div>-->
+                            </div>
+                        </div>
+                        <td class="p-quantity">
+                            <!--                            <input maxlength="12" type="text" value="{{data.cart_qty}}"-->
+                            <!--                                                      name="quantity">-->
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="">
+                                        <button type="button" id="down1"
+                                                style="height:35px;border:1px solid;margin-right:5px;margin-left:5px;width:20px"
+                                                onclick="down({{data.cart_id}})"><span
+                                                class="glyphicon glyphicon-minus" onchange=""
+                                                style="font-color:red">-</span></button>
+                                    </div>
+                                    <input type="text" id="qty1-{{data.cart_id}}"
+                                           style="text-align:center;width:60px;height:35px" value="{{data.cart_qty}}"
+                                           onChange="getQty({{data.cart_id}})"/>
+                                    <div class="input-group-btn">
+                                        <button type="button" id="up1"
+                                                style="height:35px;border:1px solid;margin-right:5px;margin-left:5px;width:20px"
+                                                onclick="up({{data.cart_id}})"><span
+                                                class="glyphicon glyphicon-plus" onchange=""
+                                                style="font-color:red">+</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-total"><span>{{data.total_amt}} ₹</span></td>
+                        <td class="edit"><a href="/client/destroy_cart/{{data.cart_id}}"><img
+                                src="{% static 'client_assets/img/icon/delte.png' %}" alt=""></a></td>
+                    </tr>
+                    </tbody>
+                    {% endfor %}
+                    {% else %}
+                    {% for key,value in request.session.cart.items %}
+                    <tr>
+                        <td class="p-name">
+                            <img alt=""
+                                 src="{% static '/images/' %}{{value.image}}">
+                        </td>
+                        <td class="p-name" style="font-size:15px">{{value.name}}</td>
+                        <td class="p-amount">{{value.price}} ₹</td>
+                        <td class="p-quantity"><input maxlength="12" type="text" value="{{value.quantity}}"
+                                                      name="quantity"></td>
+                        <td class="p-total"><span>{{value.price|multiply:value.quantity}} ₹</span></td>
+                        <td class="edit"><a href="/client/destroy_cart/{{value.id}}"><img
+                                src="{% static 'client_assets/img/icon/delte.png' %}" alt=""></a></td>
+                    </tr>
+                    </tbody>
+                    {% endfor %}
+                    {% endif %}
+                </table>
+            </div>
+            <div class="all-cart-buttons">
+                <button class="button" type="button"><span>Continue Shopping</span></button>
+                <a href="/client/clear_cart/">
+                    <button class="button" type="button"><span>CLEAR CART</span></button>
+                </a>
+
+            </div>
+            <div class="row">
+
+
+                <div class="col-lg-12 col-md-12">
+                    <div class="ht-shipping-content">
+                        <h3 style="font-size:20px">Total</h3>
+                        <div class="amount-totals">
+                            <p class="total" style="font-size:20px">Shipping Fees <span>100 ₹</span></p>
+                            <p class="total" style="font-size:20px">SUB TOTAL<span>{{total}} ₹</span></p>
+                            <p class="total" style="font-size:20px"><b>GRAND TOTAL</b> <span>{{total|add:100}} ₹</span>
+                            </p>
+                            {% if 'client_user_id' in request.session %}
+                            <a href="/client/checkout/">
+                                <button class="button" type="button"><span>Procced to checkout</span></button>
+                            </a>
+                            {% else %}
+                            <a href="/client/client_login/">
+                                <button class="button" type="button"><span>Procced to checkout</span></button>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

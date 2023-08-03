@@ -1,0 +1,91 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block content %}
+<!-- Header Area End -->
+<!-- Breadcrumb Area Start -->
+<div class="breadcrumb-area bg-dark">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/client/index/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Cart</li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- Breadcrumb Area End -->
+<!-- Cart Main Area Start -->
+<div class="cart-main-area ptb-80">
+    <div class="container">
+
+        <div class="cart-table table-responsive">
+            <table>
+                <thead>
+                <tr>
+                    <th class="p-name">Name</th>
+                    <th class="p-name">Address</th>
+                    <th class="p-name">Contact Number</th>
+                    <th class="p-name">Order Date</th>
+                    <th class="p-name">Order Status</th>
+                    <th class="p-name">Total Amount</th>
+                    <th class="p-name">Payment Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in order %}
+                <tr>
+                    <td style="font-size:17px">{{data.user_id.first_name}} {{data.user_id.last_name}}</td>
+                    <td style="font-size:17px">{{data.address}}</td>
+                    <td style="font-size:17px">{{data.contact}}</td>
+                    <td style="font-size:17px">{{data.order_date}}</td>
+                    <td style="font-size:17px">
+                        {% if data.order_status == '0' %}
+                        Pending
+                        {% elif data.order_status == '1' %}
+                        Accepted
+                        {% elif data.order_status == '2' %}
+                        Rejected
+                        {% endif %}
+                    </td>
+                    <td style="font-size:17px">{{data.total_amount}}</td>
+                    <td style="font-size:17px">
+                    {% if data.payment_status == '1' %}
+                    Cash on Delivery
+                    {% elif data.payment_status == '2'%}
+                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr"
+                          method="post">
+
+                        <input type="hidden" name="business"
+                               value="manavmistry05@gmail.com">
+
+                        <!-- Specify a Buy Now button. -->
+                        <input type="hidden" name="cmd" value="_xclick">
+
+                        <!-- Specify details about the item that buyers will purchase. -->
+                        <input type="hidden" name="item_name"
+                               value="{{request.session.client_user_id}}">
+                        <input type="hidden" name="amount" value="{{data.total_amount}}">
+                        <input type="hidden" name="currency_code" value="USD">
+
+                        <!-- Specify URLs -->
+                        <input type='hidden' name='cancel_return'
+                               value='http://127.0.0.1:8000/movie_cancel/{{BookingID.Booking_id}}'>
+
+                        <input type='hidden' name='return'
+                               value='http://127.0.0.1:8000/movie_success/{{BookingID.Booking_id}}'>
+
+                        <!-- Display the payment button. -->
+                        <button type="submit" class="button"><span>Pay Now</span></button>
+
+                    </form>
+                    {% endif %}
+                </td>
+                </tr>
+
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
